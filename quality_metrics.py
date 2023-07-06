@@ -117,11 +117,13 @@ def test_time_cumulative(sample_inputs_fixture):
 if __name__=="__main__":
     warnings.filterwarnings('ignore')
 
+    import sys
     from conftest import SampleInputs
+
+    commit_hash = sys.argv[1]
+
     sample_inputs = SampleInputs()
-
     sample_inputs.floris["solver"]["turbine_grid_points"] = 5
-
     sample_inputs.floris["farm"]["layout_x"] = X_COORDS
     sample_inputs.floris["farm"]["layout_y"] = Y_COORDS
     # sample_inputs.floris["farm"]["turbine_type"] = len(X_COORDS) * ["nrel_5mw"]
@@ -132,7 +134,7 @@ if __name__=="__main__":
     # print()
     # print("### Memory profiling")
     # test_mem_jensen_jimenez(sample_inputs)
-    
+
     # print()
     # print("### Performance profiling")
     time_jensen = test_time_jensen_jimenez(sample_inputs)
@@ -140,4 +142,9 @@ if __name__=="__main__":
     time_gch = test_time_gch(sample_inputs)
     time_cc = test_time_cumulative(sample_inputs)
 
-    print("{:.4f} {:.4f} {:.4f} {:.4f}".format(time_jensen, time_gauss, time_gch, time_cc))
+    # print("{:.4f}, {:.4f}, {:.4f}, {:.4f},".format(time_jensen, time_gauss, time_gch, time_cc))
+    print(
+        f"(\"{commit_hash}\", \"{commit_hash[0:8]}\", datetime( ), "
+        f"{time_jensen:.4f}, {time_gauss:.4f}, {time_gch:.4f}, {time_cc:.4f}, "
+        f"0.0000, \"{commit_hash[0:8]}\")"
+    )

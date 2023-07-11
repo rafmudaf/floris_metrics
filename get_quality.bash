@@ -71,8 +71,8 @@ base_dir="/home/rmudafor/Development/floris_timing/"
 for hash in "${githashes[@]}"; do
     cd $base_dir/floris
     git checkout $hash 1> /dev/null 2> /dev/null   # redirect stdout and stderr to dev null - stderr prints things that arent errors
-    pip install -e . 1> /dev/null   # redirect stdout to dev null
+    # pip install -e . 1> /dev/null   # redirect stdout to dev null
     git rev-parse --short HEAD
     cd $base_dir
-    python $base_dir/floris_metrics/quality_metrics.py
+    python $base_dir/floris_metrics/quality_metrics.py $hash
 done

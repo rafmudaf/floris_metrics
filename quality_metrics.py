@@ -119,6 +119,7 @@ if __name__=="__main__":
 
     import sys
     from conftest import SampleInputs
+    import datetime
 
     commit_hash = sys.argv[1]
 
@@ -144,7 +145,7 @@ if __name__=="__main__":
 
     # print("{:.4f}, {:.4f}, {:.4f}, {:.4f},".format(time_jensen, time_gauss, time_gch, time_cc))
     print(
-        f"(\"{commit_hash}\", \"{commit_hash[0:8]}\", datetime( ), "
+        f"(\"{commit_hash}\", \"{commit_hash[0:8]}\", {datetime.date.today( )}, "
         f"{time_jensen:.4f}, {time_gauss:.4f}, {time_gch:.4f}, {time_cc:.4f}, "
         f"0.0000, \"{commit_hash[0:8]}\")"
     )

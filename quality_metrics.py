@@ -146,5 +146,5 @@ if __name__=="__main__":
     print(
         f"(\"{commit_hash}\", \"{commit_hash[0:8]}\", datetime( ), "
         f"{time_jensen:.4f}, {time_gauss:.4f}, {time_gch:.4f}, {time_cc:.4f}, "
-        f"0.0000, \"{commit_hash[0:8]}\")"
+        f"0.0000, \"{commit_hash[0:8]}\"),"
     )

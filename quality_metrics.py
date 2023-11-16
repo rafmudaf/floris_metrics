@@ -95,6 +95,16 @@ def test_time_cumulative(sample_inputs_fixture):
     return time_profile(sample_inputs_fixture)
 
 
+def test_time_empiricalgauss(sample_inputs_fixture):
+    sample_inputs_fixture.floris["wake"]["model_strings"]["turbulence_model"] = "wake_induced_mixing"
+    sample_inputs_fixture.floris["wake"]["model_strings"]["velocity_model"] = "empirical_gauss"
+    sample_inputs_fixture.floris["wake"]["model_strings"]["deflection_model"] = "empirical_gauss"
+    sample_inputs_fixture.floris["wake"]["enable_transverse_velocities"] = False
+    sample_inputs_fixture.floris["wake"]["enable_secondary_steering"] = False
+    sample_inputs_fixture.floris["wake"]["enable_yaw_added_recovery"] = True
+    return time_profile(sample_inputs_fixture)
+
+
 # def memory_profile(input_dict):
 #     # Run once to initialize Python and memory
 #     floris = Floris.from_dict(copy.deepcopy(input_dict.floris))
@@ -141,10 +151,11 @@ if __name__=="__main__":
     time_gauss = test_time_gauss(sample_inputs)
     time_gch = test_time_gch(sample_inputs)
     time_cc = test_time_cumulative(sample_inputs)
+    time_emg = test_time_empiricalgauss(sample_inputs)
 
-    # print("{:.4f}, {:.4f}, {:.4f}, {:.4f},".format(time_jensen, time_gauss, time_gch, time_cc))
+    # print("{:.4f}, {:.4f}, {:.4f}, {:.4f}, {:.4f},".format(time_jensen, time_gauss, time_gch, time_cc, time_emg))
     print(
         f"(\"{commit_hash}\", \"{commit_hash[0:8]}\", datetime( ), "
-        f"{time_jensen:.4f}, {time_gauss:.4f}, {time_gch:.4f}, {time_cc:.4f}, "
+        f"{time_jensen:.4f}, {time_gauss:.4f}, {time_gch:.4f}, {time_cc:.4f}, {time_emg:.4f}, "
         f"0.0000, \"{commit_hash[0:8]}\"),"
     )

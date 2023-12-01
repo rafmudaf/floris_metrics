@@ -83,7 +83,9 @@ githashes=(
 # base_dir=`pwd`
 base_dir="/home/rmudafor/Development/floris_timing/"
 
-# conda activate floris
+cd $base_dir/floris
+git fetch --all
+cd $base_dir
 
 for hash in "${githashes[@]}"; do
     cd $base_dir/floris
